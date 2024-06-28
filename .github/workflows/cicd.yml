@@ -161,7 +161,7 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
 
       - name: Setup Perl ${{ matrix.perl-versions }}
-        uses: shogo82148/actions-setup-perl@28eae78d12c2bba1163aec45d123f6d9228bc307  # v1.29.0
+        uses: shogo82148/actions-setup-perl@f551dafcc94572adc179bbddbb409b3ada8f8ff5  # v1.30.0
         with:
           perl-version: ${{ matrix.perl-versions }}
 
