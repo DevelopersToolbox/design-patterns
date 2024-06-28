@@ -104,7 +104,8 @@ my $light = Light->new();
 my $light_on_command = LightOnCommand->new($light);
 my $remote = RemoteControl->new();
 $remote->set_command($light_on_command);
-$remote->press_button();```
+$remote->press_button();
+```
 
 ### Python Example
 
