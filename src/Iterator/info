@@ -1,0 +1,141 @@
+Sure! Below are examples of the iterator pattern implemented in Python, Ruby, Perl, Rust, and Go.
+
+### Python
+```python
+class MyIterator:
+    def __init__(self, start, end):
+        self.current = start
+        self.end = end
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current >= self.end:
+            raise StopIteration
+        else:
+            self.current += 1
+            return self.current - 1
+
+# Usage
+for num in MyIterator(0, 5):
+    print(num)
+```
+
+### Ruby
+```ruby
+class MyIterator
+  include Enumerable
+
+  def initialize(start, stop)
+    @start = start
+    @stop = stop
+  end
+
+  def each
+    (@start...@stop).each { |i| yield i }
+  end
+end
+
+# Usage
+MyIterator.new(0, 5).each do |num|
+  puts num
+end
+```
+
+### Perl
+```perl
+package MyIterator;
+
+sub new {
+    my ($class, $start, $end) = @_;
+    return bless { current => $start, end => $end }, $class;
+}
+
+sub next {
+    my $self = shift;
+    if ($self->{current} >= $self->{end}) {
+        return undef;
+    } else {
+        return $self->{current}++;
+    }
+}
+
+# Usage
+my $iter = MyIterator->new(0, 5);
+while (defined(my $num = $iter->next())) {
+    print "$num\n";
+}
+```
+
+### Rust
+```rust
+struct MyIterator {
+    current: usize,
+    end: usize,
+}
+
+impl MyIterator {
+    fn new(start: usize, end: usize) -> MyIterator {
+        MyIterator { current: start, end }
+    }
+}
+
+impl Iterator for MyIterator {
+    type Item = usize;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.current >= self.end {
+            None
+        } else {
+            self.current += 1;
+            Some(self.current - 1)
+        }
+    }
+}
+
+// Usage
+fn main() {
+    let iter = MyIterator::new(0, 5);
+    for num in iter {
+        println!("{}", num);
+    }
+}
+```
+
+### Go
+```go
+package main
+
+import "fmt"
+
+type MyIterator struct {
+    current, end int
+}
+
+func NewMyIterator(start, end int) *MyIterator {
+    return &MyIterator{current: start, end: end}
+}
+
+func (it *MyIterator) Next() (int, bool) {
+    if it.current >= it.end {
+        return 0, false
+    }
+    val := it.current
+    it.current++
+    return val, true
+}
+
+func main() {
+    iter := NewMyIterator(0, 5)
+    for {
+        if val, ok = iter.Next(); ok {
+            fmt.Println(val)
+        } else {
+            break
+        }
+    }
+}
+```
+
+These examples demonstrate how to create a custom iterator in each language, allowing sequential access to elements from a start to an end value.
